@@ -4,7 +4,7 @@ assemblySettings
 
 scalaVersion := "2.11.5"
 
-libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.31-R7"
+libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.31-R7" withSources() withJavadoc()
 
 jarName in assembly := "TribetronEditor.jar"
 

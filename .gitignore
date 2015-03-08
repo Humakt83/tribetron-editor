@@ -69,3 +69,4 @@ $RECYCLE.BIN/
 .metadata/
 .project
 .cache
+.settings/org.scala-ide.sdt.core.prefs
