@@ -14,10 +14,9 @@ import scalafx.scene.image.{ ImageView, Image }
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{ GridPane }
 import scalafx.scene.Node
+import com.tribetron.editor.objects.GameObject
 
 object Editor extends JFXApp {
-
-  val imageUrls = List("/img/boxbot.png", "/img/cratebot.png")
 
   stage = new PrimaryStage {
     title = "Tribetron Editor"
@@ -30,15 +29,15 @@ object Editor extends JFXApp {
   private def createImagePanel: Node = {
     val imagePanel = new Group {}
     val box = new HBox()
-    imageUrls.foreach(imageUrl => box.children.add(createGameImage(imageUrl)))
+    GameObjects.gameObjects.foreach(gameObject => box.children.add(createGameImage(gameObject.imageUrl)))
     imagePanel.children.add(box)
     imagePanel
   }
 
   private def createGameImage(imageUrl: String): Node = {
     new ImageView(new Image(this, imageUrl)) {
-      this.fitHeight = 25.0
-      this.fitWidth = 25.0
+      this.fitHeight = 50.0
+      this.fitWidth = 50.0
     }
   }
 }
