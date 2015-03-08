@@ -24,6 +24,7 @@ object GameObjects {
     new GameObject(getFullImage("sniperbot"), "sniper"),
     new GameObject(getFullImage("totterbot"), "totter"),
     new GameObject(getFullImage("psychobot"), "psycho"),
+    new GameObject(getFullImage("trasherbot"), "trasher"),
     new GameObject(getFullImage("plasma"), "plasma"),
     new GameObject(getFullImage("mine"), "mine"),
     new GameObject(getFullImage("stunmine"), "stunmine"))
