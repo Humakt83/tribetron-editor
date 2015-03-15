@@ -65,7 +65,7 @@ object Editor extends JFXApp {
     val saveButton = new Button() {
       text = "Save"
       onAction = handle {
-        MapFileUtil.writeMap(map)
+        MapFileUtil.writeMap(map, "testi")
       }
     }
     box.children.add(saveButton)
