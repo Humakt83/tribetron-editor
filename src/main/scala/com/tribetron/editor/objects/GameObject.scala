@@ -11,6 +11,9 @@ object GameObjects {
   val imagePrefix = "/img/"
   val imagePostFix = ".png"
   val gameObjects = List(
+    new GameObject(getFullImage("wall"), "wall"),
+    new GameObject(getFullImage("floor"), "floor"),
+    new GameObject(getFullImage("player"), "player"),
     new GameObject(getFullImage("boxbot"), "box"),
     new GameObject(getFullImage("cratebot"), "grid"),
     new GameObject(getFullImage("cannoneerbot"), "cannoneer"),
