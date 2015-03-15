@@ -1,8 +1,9 @@
 package com.tribetron.editor.objects
 
 import scalafx.beans.property.ObjectProperty
+import javafx.scene.image.Image
 
-class GameObject(val imageUrl: String, val jsonName: String) {
+class GameObject(val picture: Image, val jsonName: String) {
 
 }
 
@@ -32,7 +33,9 @@ object GameObjects {
     new GameObject(getFullImage("mine"), "mine"),
     new GameObject(getFullImage("stunmine"), "stunmine"))
 
-  private def getFullImage(imageName: String): String = imagePrefix + imageName + imagePostFix
+  private def getFullImage(imageName: String): Image = new Image(imagePrefix + imageName + imagePostFix)
 
   def getGameObjects: List[GameObject] = gameObjects
+  
+  def getGameObjectByImage(picture: Image): GameObject = gameObjects.filter { go => go.picture.equals(picture) }.last 
 }

@@ -7,17 +7,16 @@ import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.{StringProperty}
 
 
-class TribetronMap {
-  var width: Int = 5
-  var height: Int = 5
+class TribetronMap(val width: Int, val height: Int) {
   
-  var rows = List[Row]()
+  var rows = initTable
   
-  def resetTable = {
-    rows = List[Row]()
+  private def initTable : List[Row] = {
+    var rows = List[Row]()
     for (i <- 0 until height) {
       rows = rows :+ new Row(width)
     }
+    rows
   }
   
   def toJson: JValue = {
@@ -32,18 +31,15 @@ class TribetronMap {
 }
 
 class Row(private val numberOfColumns: Int) {
-	val columns = setColumns
+	var columns = initColumns
 
-	private def setColumns: List[Column] = {
+	private def initColumns: List[Column] = {
 			var columns = List[Column]() 
 			for (i <- 0 until numberOfColumns) {
-				columns = columns :+ new Column()
+				columns = columns :+ new Column(GameObjects.getGameObjects.apply(0))
 			}
 			columns
 	}
 }
   
-class Column {
-	val objectType = GameObjects.getGameObjects.last
-}
-  
+class Column(val objectType: GameObject)

@@ -24,10 +24,9 @@ import com.tribetron.editor.io.MapFileUtil
 object Editor extends JFXApp {
  
   val editor = this
-  val map = new TribetronMap
-  map.resetTable
+  var map = new TribetronMap(15, 15)
   val mapPanel = createMapPanel
-  var selectedGameImageView : ImageView = new ImageView()
+  var selectedGameImageView : ImageView = new ImageView(GameObjects.gameObjects.apply(0).picture)
 
   stage = new PrimaryStage {
     title = "Tribetron Editor"
@@ -42,7 +41,7 @@ object Editor extends JFXApp {
 
   private def createImagePanel: Node = {
     val box = new HBox()
-    GameObjects.gameObjects.foreach(gameObject => box.children.add(createGameImage(gameObject.imageUrl)))
+    GameObjects.gameObjects.foreach(gameObject => box.children.add(createGameImage(gameObject.picture)))
     box
   }
 
@@ -54,9 +53,7 @@ object Editor extends JFXApp {
     val button = new Button() {
         text = "Create Map"
         onAction = handle {
-          map.width = xField.text.value.toInt
-          map.height = yField.text.value.toInt
-          map.resetTable
+          map = new TribetronMap(xField.text.value.toInt, yField.text.value.toInt)
           mapPanel.children.clear()
           createMapPanelContent(mapPanel)
         }
@@ -65,7 +62,7 @@ object Editor extends JFXApp {
     val saveButton = new Button() {
       text = "Save"
       onAction = handle {
-        MapFileUtil.writeMap(map, "testi")
+        MapFileUtil.writeMap(convertMapPanelContentToMap.get, "testi")
       }
     }
     box.children.add(saveButton)
@@ -78,17 +75,33 @@ object Editor extends JFXApp {
     mapPanel
   }
   
+  private def convertMapPanelContentToMap : Option[TribetronMap] = {
+    val width = mapPanel.children.last.asInstanceOf[javafx.scene.layout.HBox].children.length
+    val height = mapPanel.children.length
+    val tribetronMap = new TribetronMap(width, height)
+    def createRow(box: HBox) : Row = {
+      def createColumn(image: ImageView) : Column = {
+        new Column(GameObjects.getGameObjectByImage(image.image.apply()))
+      }
+      var row = new Row(0)
+      box.children.foreach(child => row.columns = row.columns :+ createColumn(child.asInstanceOf[javafx.scene.image.ImageView]))
+      row
+    }
+    mapPanel.children.foreach(child => tribetronMap.rows = tribetronMap.rows :+ createRow(child.asInstanceOf[javafx.scene.layout.HBox]))
+    Some(tribetronMap)
+  }
+  
   private def createMapPanelContent(mapPanel : VBox) = {
     	def createRow(row : Row) : Node = {
     			val rowBox = new HBox()
-    			row.columns.foreach(col => rowBox.children.add(createMapImage(col.objectType.imageUrl)))
+    			row.columns.foreach(col => rowBox.children.add(createMapImage(col.objectType.picture)))
     			rowBox
     	}
     	map.rows.foreach(row => mapPanel.children.add(createRow(row)))    
   }
   
-  private def createMapImage(imageUrl: String): Node = {
-    new ImageView(new Image(this, imageUrl)) {
+  private def createMapImage(image: Image): Node = {
+    new ImageView(image) {
       this.fitHeight = 30.0
       this.fitWidth = 30.0
       this.onMouseClicked = handle {
@@ -97,8 +110,8 @@ object Editor extends JFXApp {
     }
   }
 
-  private def createGameImage(imageUrl: String): Node = {
-    new ImageView(new Image(this, imageUrl)) {
+  private def createGameImage(image: Image): Node = {
+    new ImageView(image) {
       this.fitHeight = 30.0
       this.fitWidth = 30.0
       this.onMouseClicked = handle {
