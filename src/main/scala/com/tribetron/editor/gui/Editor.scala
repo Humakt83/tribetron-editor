@@ -24,7 +24,6 @@ import com.tribetron.editor.io.MapFileUtil
 object Editor extends JFXApp {
  
   val editor = this
-  var map = new TribetronMap(15, 15)
   val mapPanel = createMapPanel
   var selectedGameImageView : ImageView = new ImageView(GameObjects.gameObjects.apply(0).picture)
 
@@ -53,25 +52,28 @@ object Editor extends JFXApp {
     val button = new Button() {
         text = "Create Map"
         onAction = handle {
-          map = new TribetronMap(xField.text.value.toInt, yField.text.value.toInt)
           mapPanel.children.clear()
-          createMapPanelContent(mapPanel)
+          createMapPanelContent(mapPanel, new TribetronMap(xField.text.value.toInt, yField.text.value.toInt))
         }
     }
     box.children.add(button)
+    val nameField = new TextField() { 
+      this.prefColumnCount = 10
+      this.text.value = "MapName"
+    }
     val saveButton = new Button() {
       text = "Save"
       onAction = handle {
-        MapFileUtil.writeMap(convertMapPanelContentToMap.get, "testi")
+        MapFileUtil.writeMap(convertMapPanelContentToMap.get, nameField.text.value.trim())
       }
     }
-    box.children.add(saveButton)
+    box.children.addAll(new Label("Map name:"), nameField, saveButton)
     box
   }
   
   private def createMapPanel : VBox = {
     val mapPanel = new VBox{}
-    createMapPanelContent(mapPanel)
+    createMapPanelContent(mapPanel, new TribetronMap(15, 15))
     mapPanel
   }
   
@@ -91,7 +93,7 @@ object Editor extends JFXApp {
     Some(tribetronMap)
   }
   
-  private def createMapPanelContent(mapPanel : VBox) = {
+  private def createMapPanelContent(mapPanel : VBox, map: TribetronMap) = {
     	def createRow(row : Row) : Node = {
     			val rowBox = new HBox()
     			row.columns.foreach(col => rowBox.children.add(createMapImage(col.objectType.picture)))
