@@ -18,12 +18,13 @@ import scalafx.scene.control.{ TextField, Label, Button, TableView, TableColumn,
 import scalafx.beans.property.{ IntegerProperty }
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes._
-import com.tribetron.editor.objects.{ GameObject, Map }
+import com.tribetron.editor.objects.{ GameObject, TribetronMap }
+import com.tribetron.editor.io.MapFileUtil
 
 object Editor extends JFXApp {
  
   val editor = this
-  val map = new Map
+  val map = new TribetronMap
   map.resetTable
   val mapPanel = createMapPanel
   var selectedGameImageView : ImageView = new ImageView()
@@ -61,6 +62,13 @@ object Editor extends JFXApp {
         }
     }
     box.children.add(button)
+    val saveButton = new Button() {
+      text = "Save"
+      onAction = handle {
+        MapFileUtil.writeMap(map)
+      }
+    }
+    box.children.add(saveButton)
     box
   }
   
@@ -79,7 +87,7 @@ object Editor extends JFXApp {
     	map.rows.foreach(row => mapPanel.children.add(createRow(row)))    
   }
   
-    private def createMapImage(imageUrl: String): Node = {
+  private def createMapImage(imageUrl: String): Node = {
     new ImageView(new Image(this, imageUrl)) {
       this.fitHeight = 30.0
       this.fitWidth = 30.0
@@ -94,7 +102,7 @@ object Editor extends JFXApp {
       this.fitHeight = 30.0
       this.fitWidth = 30.0
       this.onMouseClicked = handle {
-         selectedGameImageView.image = this.image.apply()
+         selectedGameImageView = this
       }
     }
   }
