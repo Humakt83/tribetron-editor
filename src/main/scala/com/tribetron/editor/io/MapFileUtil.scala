@@ -4,7 +4,7 @@ import org.json4s._
 import org.json4s.JsonDSL._
 import org.json4s.jackson.JsonMethods._
 import com.tribetron.editor.objects.TribetronMap
-import java.io.{ ObjectOutputStream, FileNotFoundException, IOException, File, FilenameFilter, FileOutputStream }
+import java.io.{ FileNotFoundException, IOException, File, FileOutputStream }
 
 object MapFileUtil {
 
@@ -19,9 +19,9 @@ object MapFileUtil {
 
 	def writeMap(map: TribetronMap, name: String) = {
     createFolderIfItDoesNotExist
-		val oos = new ObjectOutputStream(new FileOutputStream(folder + name + postFix))
-    oos.writeObject(pretty(render(map.toJson)))
-    oos.close()
+		val fos = new FileOutputStream(folder + name + postFix)
+    fos.write(pretty(render(map.toJson)).getBytes)
+    fos.close()
 	}
 
 }
