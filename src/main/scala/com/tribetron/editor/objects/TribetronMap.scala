@@ -1,11 +1,15 @@
 package com.tribetron.editor.objects
 
+import org.json4s._
+import org.json4s.JsonDSL._
+import org.json4s.jackson.JsonMethods._
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.{StringProperty}
 
-class Map {
-  var width = 5
-  var height = 5
+
+class TribetronMap {
+  var width: Int = 5
+  var height: Int = 5
   
   var rows = List[Row]()
   
@@ -16,7 +20,14 @@ class Map {
     }
   }
   
-
+  def toJson: JValue = {
+    ("map" ->
+      ("rows" ->
+        rows.map { row =>
+          row.columns.map { column =>
+            ("object" -> column.objectType.jsonName)
+        }}))
+  }
   
 
 }
