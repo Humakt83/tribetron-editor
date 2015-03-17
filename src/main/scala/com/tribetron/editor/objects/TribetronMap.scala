@@ -20,7 +20,8 @@ class TribetronMap(val width: Int, val height: Int) {
   }
   
   def toJson: JValue = {
-      ("rows" ->
+       ("type" -> "venture") ~
+       ("rows" ->
         rows.map { row =>
           row.columns.map { column =>
             ("object" -> column.objectType.jsonName)
