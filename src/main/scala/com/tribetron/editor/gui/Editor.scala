@@ -89,7 +89,9 @@ object Editor extends JFXApp {
       box.children.foreach(child => row.columns = row.columns :+ createColumn(child.asInstanceOf[javafx.scene.image.ImageView]))
       row
     }
-    mapPanel.children.foreach(child => tribetronMap.rows :+ createRow(child.asInstanceOf[javafx.scene.layout.HBox]))
+    var rows = List[Row]()
+    mapPanel.children.foreach(child => rows = rows :+ createRow(child.asInstanceOf[javafx.scene.layout.HBox]))
+    tribetronMap.rows = rows
     Some(tribetronMap)
   }
   
