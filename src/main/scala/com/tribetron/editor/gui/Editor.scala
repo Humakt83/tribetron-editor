@@ -73,7 +73,7 @@ object Editor extends JFXApp {
   
   private def createMapPanel : VBox = {
     val mapPanel = new VBox{}
-    createMapPanelContent(mapPanel, new TribetronMap(15, 15))
+    createMapPanelContent(mapPanel, new TribetronMap(15, 10))
     mapPanel
   }
   
@@ -89,7 +89,7 @@ object Editor extends JFXApp {
       box.children.foreach(child => row.columns = row.columns :+ createColumn(child.asInstanceOf[javafx.scene.image.ImageView]))
       row
     }
-    mapPanel.children.foreach(child => tribetronMap.rows = tribetronMap.rows :+ createRow(child.asInstanceOf[javafx.scene.layout.HBox]))
+    mapPanel.children.foreach(child => tribetronMap.rows :+ createRow(child.asInstanceOf[javafx.scene.layout.HBox]))
     Some(tribetronMap)
   }
   
