@@ -17,6 +17,7 @@ object GameObjects {
     new GameObject(getFullImage("player"), "player"),
     new GameObject(getFullImage("treasure"), "treasure"),
     new GameObject(getFullImage("money"), "money"),
+    new GameObject(getFullImage("toolkit"), "toolkit"),
     new GameObject(getFullImage("boxbot"), "box"),
     new GameObject(getFullImage("cratebot"), "crate"),
     new GameObject(getFullImage("cannoneerbot"), "cannoneer"),
