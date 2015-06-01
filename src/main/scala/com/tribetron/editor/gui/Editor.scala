@@ -20,6 +20,7 @@ import scalafx.scene.input.MouseEvent
 import scalafx.Includes._
 import com.tribetron.editor.objects.{ GameObject, TribetronMap }
 import com.tribetron.editor.io.MapFileUtil
+import scalafx.scene.control.TextArea
 
 object Editor extends JFXApp {
  
@@ -46,8 +47,14 @@ object Editor extends JFXApp {
 
   private def createInputFields: Node = {
     val box = new HBox()
+    val vBox = new VBox()
     val xField = new TextField() { this.prefColumnCount = 2 }
     val yField = new TextField() { this.prefColumnCount = 2 }
+    val storyArea = new TextArea() { 
+      this.prefColumnCount = 50
+      this.text.value = "A new challenge awaits."
+    }
+    vBox.children.add(storyArea)
     box.children.addAll(new Label("Columns:"), xField, new Label("Rows:"), yField)
     val button = new Button() {
         text = "Create Map"
@@ -64,11 +71,12 @@ object Editor extends JFXApp {
     val saveButton = new Button() {
       text = "Save"
       onAction = handle {
-        MapFileUtil.writeMap(convertMapPanelContentToMap.get, nameField.text.value.trim())
+        MapFileUtil.writeMap(convertMapPanelContentToMap.get, nameField.text.value.trim(), storyArea.text.value)
       }
     }
     box.children.addAll(new Label("Map name:"), nameField, saveButton)
-    box
+    vBox.children.add(box)
+    vBox
   }
   
   private def createMapPanel : VBox = {

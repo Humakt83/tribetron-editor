@@ -17,10 +17,10 @@ object MapFileUtil {
 			file.mkdir()
 	}
 
-	def writeMap(map: TribetronMap, name: String) = {
+	def writeMap(map: TribetronMap, name: String, story: String) = {
     createFolderIfItDoesNotExist
 		val fos = new FileOutputStream(folder + name + postFix)
-    fos.write(pretty(render(map.toJson)).getBytes)
+    fos.write(pretty(render(map.toJson(story))).getBytes)
     fos.close()
 	}
 
