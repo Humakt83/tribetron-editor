@@ -2,10 +2,6 @@ package com.tribetron.editor.objects
 
 import org.json4s._
 import org.json4s.JsonDSL._
-import org.json4s.jackson.JsonMethods._
-import scalafx.collections.ObservableBuffer
-import scalafx.beans.property.{StringProperty}
-
 
 class TribetronMap(val width: Int, val height: Int) {
   

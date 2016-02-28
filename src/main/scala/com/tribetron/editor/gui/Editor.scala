@@ -14,7 +14,7 @@ import scalafx.scene.image.{ ImageView, Image }
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{ GridPane }
 import scalafx.scene.Node
-import scalafx.scene.control.{ TextField, Label, Button, TableView, TableColumn, TableCell }
+import scalafx.scene.control.{ TextField, Label, Button, TableView, TableColumn, TableCell, CheckBox }
 import scalafx.beans.property.{ IntegerProperty }
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes._
@@ -50,6 +50,7 @@ object Editor extends JFXApp {
     val vBox = new VBox()
     val xField = new TextField() { this.prefColumnCount = 2 }
     val yField = new TextField() { this.prefColumnCount = 2 }
+    val battleCheckBox = new CheckBox() { this.text = "Battlemap" }
     val storyArea = new TextArea() { 
       this.prefColumnCount = 50
       this.text.value = "A new challenge awaits."
