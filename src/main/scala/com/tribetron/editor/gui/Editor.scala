@@ -72,10 +72,13 @@ object Editor extends JFXApp {
     val saveButton = new Button() {
       text = "Save"
       onAction = handle {
+        if (battleCheckBox.selected.apply()) {
+          val result = new BattleDialog().showAndWait()
+        }
         MapFileUtil.writeMap(convertMapPanelContentToMap.get, nameField.text.value.trim(), storyArea.text.value)
       }
     }
-    box.children.addAll(new Label("Map name:"), nameField, saveButton)
+    box.children.addAll(new Label("Map name:"), nameField, battleCheckBox, saveButton)
     vBox.children.add(box)
     vBox
   }
