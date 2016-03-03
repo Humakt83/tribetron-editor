@@ -4,7 +4,7 @@ assemblySettings
 
 scalaVersion := "2.11.5"
 
-libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.60-R9" withSources() withJavadoc()
+libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.40-R8" withSources() withJavadoc()
 
 libraryDependencies += "org.json4s" %% "json4s-native" % "3.2.11" withSources() withJavadoc()
 

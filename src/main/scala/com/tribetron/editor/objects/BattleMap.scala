@@ -2,18 +2,19 @@ package com.tribetron.editor.objects
 
 import org.json4s._
 import org.json4s.JsonDSL._
+import com.tribetron.editor.gui.BattleMapSettings
 
-class BattleMap(val maxRoster: Int, val reward: Int, val opponentTeamName: String, val opponent: Opponent.Opponent, val rounds: Int, 
-    override val width: Int, override val height: Int) extends TribetronMap(width, height) {
+class BattleMap(val battleSettings: BattleMapSettings, override val width: Int, override val height: Int) 
+    extends TribetronMap(width, height) {
   
   override def toJson(story: String): JValue = {
     ("type" -> "battle") ~
        ("story" -> story) ~
-       ("maxRoster" -> maxRoster) ~
-       ("reward" -> reward) ~
-       ("maxRoster" -> maxRoster) ~
-       ("opponentTeamName" -> opponentTeamName) ~
-       ("opponent" -> opponent.toString()) ~
+       ("maxRoster" -> battleSettings.maxRoster) ~
+       ("reward" -> battleSettings.reward) ~
+       ("opponentTeamName" -> battleSettings.opponentTeamName) ~
+       ("opponent" -> battleSettings.opponent.toString()) ~
+       ("rounds" -> battleSettings.rounds) ~
        ("rows" ->
         rows.map { row =>
           row.columns.map { column =>
