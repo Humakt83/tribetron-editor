@@ -181,7 +181,7 @@ object Editor extends JFXApp {
     }
   
     val opponentBox = new TextField() {
-      promptText = Opponent.values.toString()
+      promptText = Opponent.values.mkString(", ")
     }
   
     val roundsBox = new TextField() {
