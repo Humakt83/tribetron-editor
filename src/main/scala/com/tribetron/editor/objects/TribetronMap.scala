@@ -34,7 +34,7 @@ class Row(private val numberOfColumns: Int) {
 	private def initColumns: List[Column] = {
 			var columns = List[Column]() 
 			for (i <- 0 until numberOfColumns) {
-				columns = columns :+ new Column(GameObjects.getGameObjects.apply(0))
+				columns = columns :+ new Column(GameObjects.getGameObjects.apply(1))
 			}
 			columns
 	}
