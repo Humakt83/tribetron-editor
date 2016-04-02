@@ -46,6 +46,11 @@ object GameObjects {
     new GameObject(getFullImage("disablorbot"), "disablor"),
     new GameObject(getFullImage("combinatorBbot"), "atomitum"),
     new GameObject(getFullImage("combinatorAbot"), "plutan"),
+    new GameObject(getFullImage("strongboxbot"), "strongbox"),
+    new GameObject(getFullImage("spikebot"), "spike"),
+    new GameObject(getFullImage("quickobot"), "quicko"),
+    new GameObject(getFullImage("kamikazebot"), "kamikaze"),
+    new GameObject(getFullImage("hackrambot"), "hackram"),
     new GameObject(getFullImage("plasma"), "plasma"),
     new GameObject(getFullImage("mine"), "mine"),
     new GameObject(getFullImage("stunmine"), "stunmine"))
