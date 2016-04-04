@@ -41,7 +41,7 @@ object GameObjects {
     new GameObject(getFullImage("trasherbot"), "trasher"),
     new GameObject(getFullImage("hottotbot"), "hottot"),
     new GameObject(getFullImage("colossusbot"), "colossus"),
-    new GameObject(getFullImage("megahunterbot"), "megaHunter"),
+    new GameObject(getFullImage("megahunterbot"), "megahunter"),
     new GameObject(getFullImage("tauronbot"), "tauron"),
     new GameObject(getFullImage("disablorbot"), "disablor"),
     new GameObject(getFullImage("combinatorBbot"), "atomitum"),
